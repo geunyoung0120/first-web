@@ -1,0 +1,15 @@
+body{
+   color: orange;
+   background-color: black;
+    a:visited {
+      color: white;
+    }
+
+    #weather{
+        position:absolute;
+        top:0;
+        right:0;
+        color: wheat;
+        
+    }
+}

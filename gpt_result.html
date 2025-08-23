@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>추천 코스 결과</title>
+  <link rel="stylesheet" href="gpt_result.css"/>
+
+  <!-- Kakao Maps (+Places). 결과 페이지에서도 필요 -->
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34bdf00475e443fffd4117a8d6ee3c14&libraries=services"></script>
+  <script src="gpt_result.js" defer></script>
+</head>
+<body>
+  <div id="fileWarn" class="warn" style="display:none"></div>
+
+  <div class="container">
+    <h1 id="courseTitle">추천 코스</h1>
+    <div class="row">
+      <button id="mapToggle" class="btn">지도 열기</button>
+      <button onclick="history.back()" class="btn btn--ghost">◀ 돌아가기</button>
+    </div>
+
+    <p id="selectedInfo">로딩 중…</p>
+    <div id="courseTabs" class="course-tabs" style="display:none;"></div>
+    <div id="map"></div>
+    <div id="timetable"></div>
+    <div id="summary" class="sum-box" style="display:none;"></div>
+  </div>
+</body>
+</html>
