@@ -1,5 +1,6 @@
 .container{max-width:980px;margin:24px auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,.06)}
 h1{margin:0 0 12px}
+h2{margin:18px 0 8px}
 #selectedInfo{margin:4px 0 12px;color:#444}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .btn{padding:10px 14px;border:0;border-radius:10px;background:#4CAF50;color:#fff;cursor:pointer}
@@ -24,3 +25,16 @@ h1{margin:0 0 12px}
 
 .sum-box{margin-top:14px;padding:12px;border-radius:10px;background:#f8fafc;color:#333;font-size:14px}
 .warn{max-width:980px;margin:12px auto;padding:12px;border-radius:8px;background:#fff3cd;color:#7a5d00}
+
+/* 현지 리스트 패널 */
+.locals{margin-top:10px}
+.local-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}
+.ltab{padding:8px 12px;border-radius:999px;background:#eef2f7;border:0;cursor:pointer}
+.ltab.active{background:#4CAF50;color:#fff}
+.local-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.local-card{display:grid;grid-template-columns:84px 1fr;gap:10px;padding:10px;border-radius:12px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.local-card .lthumb{width:84px;height:64px;border-radius:8px;object-fit:cover;background:#e5e7eb}
+.local-card .lmeta{margin:0;color:#55616d;font-size:13px}
+.local-card .lname{margin:0 0 2px;font-weight:700}
+.local-card .ltag{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:999px;background:#f1f5f9;color:#334155;font-size:12px}
+@media (max-width:680px){ .local-list{grid-template-columns:1fr} }
