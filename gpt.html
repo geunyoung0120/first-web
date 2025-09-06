@@ -5,29 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>여행 계획 만들기</title>
   <link rel="stylesheet" href="gpt.css"/>
-
-  <!-- Kakao Places (구 단위 자동완성용): JS 키 필수 -->
   <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34bdf00475e443fffd4117a8d6ee3c14&libraries=services"></script>
-  <script src="gpt.js" defer></script>
+  <script defer src="gpt.js"></script>
 </head>
 <body>
   <div class="wrap">
     <header class="header">
       <h1>여행 계획 만들기</h1>
-      <p class="sub">원하는 지역(구 단위)과 조건을 고르면, AI가 최적 코스를 만들어준다.</p>
+      <p class="sub">지역·날짜·예산·취향을 고르면 로컬 데이터로 코스를 만들어준다.</p>
     </header>
 
-    <!-- 지역 검색: 구 단위 자동완성 -->
+    <!-- 지역 검색 -->
     <section class="card">
-      <label class="label">여행 지역 선택</label>
+      <label class="label">여행 지역(구 단위)</label>
       <div class="searchbox">
-        <input id="searchInput" type="text" placeholder="예: 부산… (해운대구/수영구 등 자동완성)" autocomplete="off"/>
+        <input id="searchInput" type="text" placeholder="예: 부산 해운대구" autocomplete="off"/>
         <div id="suggestList" class="suggest hidden"></div>
       </div>
-      <p id="pickedRegion" class="picked">선택된 지역: <span>-</span></p>
+      <p class="picked">선택된 지역: <span id="pickedRegion">-</span></p>
     </section>
 
-    <!-- 여행 날짜 -->
+    <!-- 날짜 -->
     <section class="card grid-2">
       <div>
         <label class="label">출발일</label>
@@ -37,39 +35,37 @@
         <label class="label">도착일</label>
         <input id="endDate" type="date"/>
       </div>
-      <div class="col-2">
-        <span id="daysLabel" class="hint">여행 일수: -</span>
-      </div>
+      <div class="col-2 hint" id="daysLabel">여행 일수: -</div>
     </section>
 
-    <!-- 예산 / 이동수단 / 날씨 -->
+    <!-- 예산/이동/날씨 -->
     <section class="card grid-2">
       <div>
         <label class="label">예산(1인 총액, 원)</label>
-        <input id="budgetAmount" type="number" min="0" step="1000" placeholder="예: 150000"/>
+        <input id="budgetAmount" type="number" min="0" step="1000" placeholder="예: 200000"/>
       </div>
       <div>
         <label class="label">예산 수준</label>
-        <div id="budgetTier" class="seg">
-          <button type="button" data-tier="low" class="seg-item active">저렴</button>
-          <button type="button" data-tier="mid" class="seg-item">중간</button>
-          <button type="button" data-tier="high" class="seg-item">고급</button>
+        <div id="budgetTier" class="seg" data-value="mid">
+          <button type="button" class="seg-item" data-tier="low">저렴</button>
+          <button type="button" class="seg-item active" data-tier="mid">중간</button>
+          <button type="button" class="seg-item" data-tier="high">고급</button>
         </div>
       </div>
       <div>
         <label class="label">이동 수단</label>
-        <div id="transport" class="seg">
-          <button type="button" data-mode="도보" class="seg-item">도보</button>
-          <button type="button" data-mode="대중교통" class="seg-item active">대중교통</button>
-          <button type="button" data-mode="자동차" class="seg-item">자동차</button>
+        <div id="transport" class="seg" data-value="대중교통">
+          <button type="button" class="seg-item" data-mode="도보">도보</button>
+          <button type="button" class="seg-item active" data-mode="대중교통">대중교통</button>
+          <button type="button" class="seg-item" data-mode="자동차">자동차</button>
         </div>
       </div>
       <div>
         <label class="label">날씨(선택)</label>
-        <div id="weather" class="seg">
-          <button type="button" data-w="무관" class="seg-item active">무관</button>
-          <button type="button" data-w="맑음" class="seg-item">맑음</button>
-          <button type="button" data-w="비" class="seg-item">비</button>
+        <div id="weather" class="seg" data-value="무관">
+          <button type="button" class="seg-item active" data-w="무관">무관</button>
+          <button type="button" class="seg-item" data-w="맑음">맑음</button>
+          <button type="button" class="seg-item" data-w="비">비</button>
         </div>
       </div>
     </section>
@@ -78,14 +74,14 @@
     <section class="card">
       <label class="label">취향 필터(복수 선택)</label>
       <div id="moodFilters" class="chips">
-        <button type="button" data-m="힐링" class="chip">힐링</button>
-        <button type="button" data-m="액티비티" class="chip">액티비티</button>
-        <button type="button" data-m="먹거리" class="chip">먹거리</button>
-        <button type="button" data-m="문화" class="chip">문화</button>
-        <button type="button" data-m="로맨틱" class="chip">로맨틱</button>
-        <button type="button" data-m="오전" class="chip">오전</button>
-        <button type="button" data-m="오후" class="chip">오후</button>
-        <button type="button" data-m="야간" class="chip">야간</button>
+        <button type="button" class="chip" data-m="힐링">힐링</button>
+        <button type="button" class="chip" data-m="액티비티">액티비티</button>
+        <button type="button" class="chip" data-m="먹거리">먹거리</button>
+        <button type="button" class="chip" data-m="문화">문화</button>
+        <button type="button" class="chip" data-m="로맨틱">로맨틱</button>
+        <button type="button" class="chip" data-m="오전">오전</button>
+        <button type="button" class="chip" data-m="오후">오후</button>
+        <button type="button" class="chip" data-m="야간">야간</button>
       </div>
     </section>
 
@@ -94,7 +90,6 @@
     </footer>
   </div>
 
-  <!-- 파일 모드 경고 -->
   <div id="fileWarn" class="warn hidden"></div>
 </body>
 </html>

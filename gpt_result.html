@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>추천 코스 결과</title>
   <link rel="stylesheet" href="gpt_result.css"/>
-
-  <!-- Kakao Maps (+Places). JavaScript 키 사용 -->
   <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34bdf00475e443fffd4117a8d6ee3c14&libraries=services"></script>
-  <script src="gpt_result.js" defer></script>
+  <script defer src="gpt_result.js"></script>
 </head>
 <body>
   <div id="fileWarn" class="warn" style="display:none"></div>
@@ -22,15 +20,15 @@
 
     <p id="selectedInfo">로딩 중…</p>
 
-    <!-- 현지 리스트 패널 -->
+    <!-- 로컬 장소 패널 -->
     <section class="locals">
       <h2>이 지역 로컬 추천</h2>
-      <div class="local-tabs" id="localTabs">
-        <button class="ltab active" data-cat="food">로컬 맛집</button>
+      <div id="localTabs" class="local-tabs">
+        <button class="ltab active" data-cat="food">맛집</button>
         <button class="ltab" data-cat="cafe">카페</button>
         <button class="ltab" data-cat="sight">관광명소</button>
         <button class="ltab" data-cat="culture">문화</button>
-        <button class="ltab" data-cat="market">시장/재래시장</button>
+        <button class="ltab" data-cat="market">시장</button>
       </div>
       <div id="localList" class="local-list"></div>
     </section>
