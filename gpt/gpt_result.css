@@ -19,6 +19,7 @@ h1{margin:0 0 12px} h2{margin:18px 0 8px}
 .thumb{width:140px;height:90px;border-radius:10px;object-fit:cover;background:#e5e7eb}
 .sum-box{margin-top:14px;padding:12px;border-radius:10px;background:#f8fafc;color:#333;font-size:14px}
 .warn{max-width:980px;margin:12px auto;padding:12px;border-radius:8px;background:#fff3cd;color:#7a5d00}
+
 /* 로컬 패널 */
 .locals{margin-top:10px}
 .local-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}

@@ -5,8 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>추천 코스 결과</title>
   <link rel="stylesheet" href="gpt_result.css"/>
-  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60a2135b75caf6f6cbbe49bd73437583&libraries=services"></script>
+  <!-- Kakao SDK: autoload=false 로드 후 kakao.maps.load(main) 호출 -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_JS_KEY&autoload=false&libraries=services" defer></script>
   <script defer src="gpt_result.js"></script>
+  <script>
+    // SDK 초기화가 끝난 뒤 main 실행
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.kakao && kakao.maps && kakao.maps.load) kakao.maps.load(window.main);
+      else window.main();
+    });
+  </script>
 </head>
 <body>
   <div id="fileWarn" class="warn" style="display:none"></div>
@@ -29,6 +37,7 @@
         <button class="ltab" data-cat="sight">관광명소</button>
         <button class="ltab" data-cat="culture">문화</button>
         <button class="ltab" data-cat="market">시장</button>
+        <button class="ltab" data-cat="stay">숙소</button>
       </div>
       <div id="localList" class="local-list"></div>
     </section>
